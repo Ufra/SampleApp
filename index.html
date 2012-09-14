@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Forgot Password</title>
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+
+		<link rel="stylesheet" type="css/text" href="css/styles.css"/>
+		
+		<script src="js/jquery.js"></script>
+		<script src="js/forgotPass.js"></script>
+		<script src="phonegap.js"></script>
+	</head>
+	<body>
+		<section id="mainContainer">
+			<header class="head logo">
+				<!--<span class="logo"/>-->
+			</header>
+			<div class="content">
+				<h1>Problem Loggin in?</h1>
+				<p>Just select one of the options below and we'll help you get into your account</p>
+				<div class="btnBox formEle">
+					<ul>
+						<li class="noBorder">
+							<a href="#forgotPassword" class="btn active primary">I Don't Know My Password</a>
+						</li>
+						<li class="noBorder">
+							<a href="#forgotEmail" class="btn active primary">I Don't Know Which Email I Used</a>
+						</li>
+						<li class="noBorder">
+							<a href="#noPhoneNo" class="btn active primary">I Only Know My Mobile Number</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="footer">
+				<p>
+					<a href="#">Cancel</a>
+				</p>
+			</div>
+		</section>
+		<section id="forgotPassword" class="hide">
+			<div class="error">
+				<p id="error-email" class="hide">Please enter correct email address in format username@domain.com</p>
+				<p id="error-tel" class="hide">Please enter a valid phone number</p>
+				<?php	$reqURI = $_SERVER["REQUEST_URI"];
+					if(stripos($reqURI,"?error=")){
+						include("components/errorComponent.php");
+					}
+				?>
+			</div>
+			<header class="head logo">
+				<!--<span class="logo"/>-->
+			</header>
+			<div class="content">
+				<h1>Forgot password 123?</h1>
+				<p>Enter the email address you used to create your PayPal account and we'll send you a link to reset your password.</p>
+				<div class="formEle">
+					<form name="options" action="validation/validateEmail.php" method="POST">
+						<ul>
+							<li>
+								<input type="email" tabindex=0 name="email" id="email" value="" placeholder="Enter email address"/>
+							</li>
+							<li class="noBorder">
+								<input class="btn primary" type="submit" name="email_continue" id="continue" value="Continue" disabled="disabled"/>
+							</li>
+						</ul>
+					</form>
+				</div>
+			</div>
+			<footer class="footer">
+				<?php $reqURI = $_SERVER["REQUEST_URI"];
+					if(stripos($reqURI,"noEmail")){?>
+						<p class="txt">Still having problem</p>
+						<p class="txt">Call Customer Care</p>
+						<p><a href="#">(800) 888-8888</a></p>
+				<?}else{?>
+					<p><a href="#cancel">Cancel</a></p>
+				<?}?>
+				
+			</footer>
+		</section>
+		<section id="forgotEmail" class="hide">
+			<div class="error">
+				<p id="error-email" class="hide">Please enter correct email address in format username@domain.com</p>
+				<p id="error-tel" class="hide">Please enter a valid phone number</p>
+				<?php	$reqURI = $_SERVER["REQUEST_URI"];
+					echo $reqURI;
+					if(stripos($reqURI,"?error")){
+						echo 'dispaly error messagedafsd fsdf ads fasd';
+						include("components/errorComponent.php");
+					}
+				?>
+			</div>
+			<header class="head logo">
+				<!--<span class="logo"/>-->
+			</header>
+			<div class="content">
+				<h2>I don't know email used</h2>
+				<p>Enter upto 2 email addresses you might have used to create your PayPal account. We'll check to find a match.</p>
+				<div class="formEle">
+					<form name="options" action="validation/validateEmails.php" method="POST">
+						<ul>
+							<li>
+								<input type="email" name="email" id="email" value="" placeholder="Enter email address"/>
+								<span class="reset hide">x</span>
+							</li>
+							<li>
+								<input type="email" name="email_1" id="email" value="" placeholder="Enter email address"/>
+								<span class="reset hide">x</span>
+							</li>
+							<li class="noBorder">
+								<input class="btn primary" type="submit" name="email_continue" id="continue" value="Find My Email" disabled="disable"/>
+							</li>
+						</ul>
+					</form>
+				</div>
+			</div>
+			<footer class="footer">
+				<p><a href="#cancel">Cancel</a></p>
+			</footer>
+		</section>
+		<section id="noPhoneNo" class="hide">
+			<div class="error">
+				<p id="error-email" class="hide">Please enter correct email address in format username@domain.com</p>
+				<p id="error-tel" class="hide">Please enter a valid phone number</p>
+				<?php	$reqURI = $_SERVER["REQUEST_URI"];
+					if(stripos($reqURI,"?error=")){
+						include("components/errorComponent.php");
+					}
+				?>
+			</div>
+			<div class="head logo">
+				<!--<span class="logo"/>-->
+			</div>
+			<div class="content">
+				<h2>Forgot password?</h2>
+				<p>Enter the mobile number you used to create  your PayPal accound and we'll send you a link to reset your password.</p>
+				<div class="formEle">
+					<form name="options" action="temporaryCode.php" method="POST">
+						<ul>
+							<li class="inline telCode">
+								<select class="showPageOverlay" name="telCode">
+									<option value="0">+1</option>
+								</select>
+							</li>
+							<li>
+								<input type="tel" name="email" id="email" value="" placeholder="Enter mobile number"/>
+								<span class="reset hide">x</span>
+							</li>
+							<li class="noBorder clear">
+								<input class="btn primary" type="submit" name="email_continue" id="continue" value="Continue" disabled="disable"/>
+							</li>
+						</ul>
+					</form>
+				</div>
+			</div>
+			<div class="pageOverlay hide">
+				<div class="heading">
+					<span class="reset">x</span>
+					<h3>Select Country Code</h3>
+				</div>
+				<div class="body">
+					<input type="radio" id="one"/>
+					<label for="one">United States</label>
+					<input type="radio" id="one"/>
+					<label for="one">United States</label>
+					<input type="radio" id="one"/>
+					<label for="one">United States</label>
+					<input type="radio" id="one"/>
+					<label for="one">United States</label>
+					<input type="radio" id="one"/>
+					<label for="one">United States</label>
+					<input type="radio" id="one"/>
+					<label for="one">United States</label>
+					<input type="radio" id="one"/>
+					<label for="one">United States</label>
+					<input type="radio" id="one"/>
+					<label for="one">United States</label>
+					<input type="radio" id="one"/>
+					<label for="one">United States</label>
+					<input type="radio" id="one"/>
+					<label for="one">United States</label>
+					<input type="radio" id="one"/>
+					<label for="one">United States</label>
+					<input type="radio" id="one"/>
+					<label for="one">United States</label>
+					<input type="radio" id="one"/>
+					<label for="one">United States</label>
+					<input type="radio" id="one"/>
+					<label for="one">United States</label>
+					<input type="radio" id="one"/>
+					<label for="one">United States</label>
+					<input type="radio" id="one"/>
+					<label for="one">United States</label>
+					<input type="radio" id="one"/>
+					<label for="one">United States</label>
+					<input type="radio" id="one"/>
+					<label for="one">United States</label>
+					<input type="radio" id="one"/>
+					<label for="one">United States</label>
+					<input type="radio" id="one"/>
+					<label for="one">United States</label>
+					<input type="radio" id="one"/>
+					<label for="one">United States</label>
+					<input type="radio" id="one"/>
+					<label for="one">United States</label>
+					<input type="radio" id="one"/>
+					<label for="one">United States</label>
+					<input type="radio" id="one"/>
+					<label for="one">United States</label>
+					<input type="radio" id="one"/>
+					<label for="one">United States</label>
+				</div>
+			</div>
+			<footer class="footer">
+				<p><a href="#cancel">Cancel</a></p>
+			</footer>
+		</section>
+	</body>
+</html>
